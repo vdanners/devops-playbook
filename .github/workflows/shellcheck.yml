@@ -1,0 +1,25 @@
+name: ShellCheck Pipeline
+
+# Trigger the workflow on push or pull request events to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-shell-scripts:
+    name: Lint & Validate Shell Scripts
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Clone the repository into the GitHub Actions runner
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      # 2. Run ShellCheck targeting only the /scripts directory
+      - name: Run ShellCheck
+        uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: './scripts'
+          severity: 'warning' # Fail the pipeline only on errors or warnings (ignores info/style rules)

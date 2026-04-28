@@ -25,6 +25,7 @@ log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 CREDENTIALS_FILE="/home/ubuntu/.telegram_env"
 
 if [ -f "$CREDENTIALS_FILE" ]; then
+    # shellcheck disable=SC1090
     source "$CREDENTIALS_FILE"
 else
     log_warn "Credentials file ($CREDENTIALS_FILE) not found. Telegram alerts are disabled."
